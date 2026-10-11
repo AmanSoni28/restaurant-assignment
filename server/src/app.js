@@ -8,7 +8,7 @@ import { errorHandler, notFound } from './middleware/errorHandler.js';
 
 const app = express();
 
-const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5180')
+const allowedOrigins = (process.env.CLIENT_ORIGIN || 'https://restaurant-assignment-1.onrender.com')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
