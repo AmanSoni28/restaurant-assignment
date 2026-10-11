@@ -8,7 +8,12 @@ import { errorHandler, notFound } from './middleware/errorHandler.js';
 
 const app = express();
 
-const allowedOrigins = ('https://restaurant-assignment-1.onrender.com')
+const defaultOrigin = process.env.NODE_ENV === 'production'
+  ? process.env.RENDER_EXTERNAL_URL
+  : 'http://localhost:5180';
+const allowedOrigins = [process.env.CLIENT_ORIGIN, defaultOrigin]
+  .filter(Boolean)
+  .join(',')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);

@@ -142,9 +142,12 @@ There are no migrations. Mongoose creates the collections and indexes on first u
 | `CLIENT_ORIGIN` | `http://localhost:5180` | Comma-separated frontend origins allowed to call the API |
 | `TAX_RATE` | 5 | GST % (split equally into CGST and SGST) |
 
-For a different API host, set the frontend build-time variable `VITE_API_URL` (for example, `https://api.example.com/api`). Without it, development uses `http://localhost:5000/api` and production uses the same-origin `/api` path.
+For a different API host, set the frontend build-time variable `VITE_API_URL` (for example, `https://api.example.com/api`). Without it, development uses `http://localhost:5000/api` and production calls `https://restaurant-assignment.onrender.com/api`.
 
 Restaurant name, address and GSTIN printed on the bill are set in `client/src/config.js`.
+
+### Deploying to Render
+This repository includes a `render.yaml` Blueprint for a single Node web service that builds the React app and serves it with the Express API. Push the project to GitHub, then create a Blueprint in Render and select this repository. During setup, provide `MONGODB_URI` using a reachable MongoDB Atlas connection string; the local MongoDB URL in `.env.example` is not reachable from Render. Render supplies `PORT` and the public service URL automatically.
 
 ### Authentication
 Not implemented. See "Next steps" below.
