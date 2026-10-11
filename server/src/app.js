@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -7,6 +8,12 @@ import { errorHandler, notFound } from './middleware/errorHandler.js';
 
 const app = express();
 
+const allowedOrigins = (process.env.CLIENT_ORIGIN || 'http://localhost:5180')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use('/api', cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 app.use('/api', apiRoutes);

@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: '/api', timeout: 15000 });
+const baseURL = import.meta.env.VITE_API_URL
+  || (import.meta.env.DEV ? 'http://localhost:5000/api' : '/api');
+
+const api = axios.create({ baseURL, timeout: 15000 });
 
 export function getErrorMessage(err) {
   if (err.response?.data?.message) return err.response.data.message;

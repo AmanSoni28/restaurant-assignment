@@ -67,7 +67,7 @@ server/                REST API (Express)
   test/                Unit tests for billing logic
 ```
 
-In development, Vite runs on port 5180 and forwards `/api` requests to Express on port 5000.
+In development, Vite runs on port 5180 and the browser calls Express directly on port 5000. Express allows the frontend origin configured by `CLIENT_ORIGIN` in `server/.env`.
 In production, Express serves the built React app and the API from one port.
 
 ### Data model
@@ -139,7 +139,10 @@ There are no migrations. Mongoose creates the collections and indexes on first u
 |---|---|---|
 | `MONGODB_URI` | - | MongoDB connection string |
 | `PORT` | 5000 | API port |
+| `CLIENT_ORIGIN` | `http://localhost:5180` | Comma-separated frontend origins allowed to call the API |
 | `TAX_RATE` | 5 | GST % (split equally into CGST and SGST) |
+
+For a different API host, set the frontend build-time variable `VITE_API_URL` (for example, `https://api.example.com/api`). Without it, development uses `http://localhost:5000/api` and production uses the same-origin `/api` path.
 
 Restaurant name, address and GSTIN printed on the bill are set in `client/src/config.js`.
 

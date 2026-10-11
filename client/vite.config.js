@@ -7,7 +7,5 @@ export default defineConfig({
   server: {
     port: 5180,
     strictPort: true,
-    // forward API calls to the Express server during development
-    proxy: { '/api': 'http://localhost:5000' },
   },
 });
